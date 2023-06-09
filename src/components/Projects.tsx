@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { AiFillFolder, AiFillFolderOpen } from 'react-icons/ai'
 import { IoCaretUpSharp } from 'react-icons/io5'
+import { FaGithub } from 'react-icons/fa'
+import { BiLinkExternal } from 'react-icons/bi'
 import Process from './Process'
 import Learnings from './Learnings'
 
@@ -21,6 +23,8 @@ interface ProjectsData {
 				paragraph: string
 			}[]
 		}[]
+		github_repository: string
+		live_site: string
 	}
 }
 
@@ -91,22 +95,38 @@ const Projects = ({ restBase }: ProjectsProps) => {
 									className='my-6'
 									dangerouslySetInnerHTML={{ __html: project.acf.summary }}
 								></p>
-								<button
-									className='mr-5 cursor-pointer text-blue-200 hover:text-white'
-									onClick={() =>
-										toggleProject(project.id, undefined, 'learnings')
-									}
-								>
-									Learnings
-								</button>
-								<button
-									className='cursor-pointer text-blue-200 hover:text-white'
-									onClick={() =>
-										toggleProject(project.id, undefined, 'process')
-									}
-								>
-									Process
-								</button>
+								<div className='flex'>
+									<button
+										className='mr-5 cursor-pointer text-blue-200 hover:text-white'
+										onClick={() =>
+											toggleProject(project.id, undefined, 'learnings')
+										}
+									>
+										Learnings
+									</button>
+									<button
+										className='cursor-pointer text-blue-200 hover:text-white'
+										onClick={() =>
+											toggleProject(project.id, undefined, 'process')
+										}
+									>
+										Process
+									</button>
+									<a
+										className='ml-auto text-2xl text-blue-200 hover:text-white'
+										href={project.acf.github_repository}
+										target='_blank'
+									>
+										<FaGithub />
+									</a>
+									<a
+										className='ml-5 mr-2 text-2xl text-blue-200 hover:text-white'
+										href={project.acf.live_site}
+										target='_blank'
+									>
+										<BiLinkExternal />
+									</a>
+								</div>
 							</div>
 						)}
 						{expandedProjectId === project.id && (
