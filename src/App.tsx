@@ -1,7 +1,13 @@
+import Profile from './components/Profile'
+import ProjectsIntro from './components/ProjectsIntro'
+
 function App() {
+	const restBase = 'http://localhost/wp-portfolio/wp-json/wp/v2/'
+
 	return (
 		<>
-			<h1>Portfolio</h1>
+			<Profile restBase={restBase} />
+			<ProjectsIntro restBase={restBase} />
 		</>
 	)
 }
