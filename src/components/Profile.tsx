@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { MdFormatQuote } from 'react-icons/md'
 
 interface ProfileData {
 	acf: {
@@ -37,7 +36,6 @@ const Profile = ({ restBase }: ProfileProps) => {
 				<section className='px-10 py-16'>
 					<h2 className='animate-fade-in text-profile-red opacity-0 animation-delay-500 first-letter:text-2xl first-letter:font-extrabold'>
 						{data.acf.bio_opening}
-						<MdFormatQuote className='mb-3 mr-2 inline-block' />
 					</h2>
 					<p className='my-6 animate-fade-in opacity-0 animation-delay-2000'>
 						{data.acf.bio}
