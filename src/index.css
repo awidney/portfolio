@@ -4,11 +4,11 @@
 
 @layer base {
 	body {
-		@apply bg-white font-nunito-sans;
+		@apply bg-gray-900 font-nunito-sans text-white;
 	}
 
 	h1 {
-		@apply text-xl text-profile-red;
+		@apply text-xl;
 	}
 
 	h2 {
@@ -16,21 +16,21 @@
 	}
 
 	h3 {
-		@apply mb-2 text-lg font-semibold;
+		@apply text-lg font-semibold;
 	}
 
 	h4 {
-		@apply mb-4 text-base font-medium text-blue-200;
+		@apply mb-4 text-base font-medium;
 	}
 
 	h2,
 	h3,
 	h4 {
-		@apply uppercase tracking-wider;
+		@apply tracking-wider;
 	}
 
 	p {
-		@apply mb-4 text-sm leading-6;
+		@apply mb-4 mt-1 text-sm leading-6 text-gray-300;
 	}
 
 	blockquote {
