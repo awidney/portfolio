@@ -33,14 +33,11 @@ const Profile = ({ restBase }: ProfileProps) => {
 	return (
 		<>
 			{data && (
-				<section className='px-10 py-16'>
-					<h2 className='animate-fade-in text-profile-red opacity-0 animation-delay-500 first-letter:text-2xl first-letter:font-extrabold'>
-						{data.acf.bio_opening}
-					</h2>
-					<p className='my-6 animate-fade-in opacity-0 animation-delay-2000'>
+				<section className='py-16'>
+					<p className='my-6 animate-fade-in opacity-0  first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:font-bold first-letter:text-white first-line:uppercase first-line:tracking-widest'>
 						{data.acf.bio}
 					</p>
-					<h1 className='mr-4 mt-8 animate-fade-in text-right font-caveat opacity-0 animation-delay-2000'>
+					<h1 className='mr-4 mt-8 animate-fade-in text-right font-caveat opacity-0'>
 						{data.acf.name},
 						<br />
 						{data.acf.role}
