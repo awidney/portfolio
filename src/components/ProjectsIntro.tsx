@@ -34,8 +34,8 @@ const ProjectsIntro = ({ restBase }: ProjectsProps) => {
 	return (
 		<>
 			{data && (
-				<section className='animate-fade-in bg-project-blue px-10 py-16 text-white opacity-0 animation-delay-2000'>
-					<h2 className='text-white'>{data.title.rendered}</h2>
+				<section className='animate-fade-in py-16 text-white opacity-0 '>
+					<h2 className=''>{data.title.rendered}</h2>
 					<p
 						className='mb-20'
 						dangerouslySetInnerHTML={{ __html: data.content.rendered }}
