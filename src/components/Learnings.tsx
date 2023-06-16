@@ -1,5 +1,3 @@
-import { FaCaretRight } from 'react-icons/fa'
-
 interface LearningsProps {
 	learningsDescription: string
 	learnings: {
@@ -9,20 +7,17 @@ interface LearningsProps {
 
 const Learnings = ({ learningsDescription, learnings }: LearningsProps) => {
 	return (
-		<article className='animate-fade-in pb-12 opacity-0'>
-			<p className='mb-12 mt-6'>{learningsDescription}</p>
+		<article className='pb-12'>
+			<p className='mb-12'>{learningsDescription}</p>
+
 			<ul>
 				{learnings.map((item, index) => (
-					<div className='grid grid-cols-[20px_auto] text-sm' key={index}>
-						<FaCaretRight className='mt-1 text-blue-200' />
-						<li
-							className={`mb-6 leading-6 ${
-								index === learnings.length - 1 ? 'mb-0' : ''
-							}`}
-						>
-							{item.learning}
-						</li>
-					</div>
+					<li
+						key={index}
+						className='mb-6 list-disc text-sm leading-6 text-gray-300 last-of-type:mb-0'
+					>
+						{item.learning}
+					</li>
 				))}
 			</ul>
 		</article>
