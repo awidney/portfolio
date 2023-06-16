@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Projects from './Projects'
+import { useInView } from 'react-intersection-observer'
 
 interface ProjectsIntroData {
 	title: {
@@ -17,6 +18,7 @@ interface ProjectsProps {
 const ProjectsIntro = ({ restBase }: ProjectsProps) => {
 	const restPath = restBase + 'pages/76'
 	const [data, setData] = useState<ProjectsIntroData | null>(null)
+	const [ref, inView] = useInView({ threshold: 1 })
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -34,12 +36,14 @@ const ProjectsIntro = ({ restBase }: ProjectsProps) => {
 	return (
 		<>
 			{data && (
-				<section className='animate-fade-in py-16 text-white opacity-0 '>
-					<h2 className=''>{data.title.rendered}</h2>
-					<p
-						className='mb-20'
-						dangerouslySetInnerHTML={{ __html: data.content.rendered }}
-					></p>
+				<section className='py-16 text-white'>
+					<div ref={ref} className={`${inView ? 'show' : ''} hide`}>
+						<h2 className=''>{data.title.rendered}</h2>
+						<p
+							className='mb-20'
+							dangerouslySetInnerHTML={{ __html: data.content.rendered }}
+						></p>
+					</div>
 					<Projects restBase={restBase} />
 				</section>
 			)}

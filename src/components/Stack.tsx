@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { FaReact, FaHtml5, FaSass, FaWordpress, FaGithub } from 'react-icons/fa'
+import StackItem from './StackItem'
+import { useInView } from 'react-intersection-observer'
 import {
 	SiJavascript,
 	SiTypescript,
@@ -53,6 +55,7 @@ interface StackProps {
 const Stack = ({ restBase }: StackProps) => {
 	const restPath = restBase + 'pages/98'
 	const [data, setData] = useState<StackData | null>(null)
+	const [ref, inView] = useInView({ threshold: 1 })
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -70,32 +73,27 @@ const Stack = ({ restBase }: StackProps) => {
 	return (
 		<>
 			{data && (
-				<section className='animate-fade-in py-16 opacity-0 '>
-					<h2 className=''>{data.title.rendered}</h2>
-
-					<p
-						className='mb-20'
-						dangerouslySetInnerHTML={{ __html: data.content.rendered }}
-					></p>
-
-					<div className=''>
-						{data.acf.stack.map((item, index) => {
-							const IconComponent = technologyIcons[item.technology]
-
-							return (
-								<article key={index} className='mb-6 flex items-start gap-4'>
-									<span className='shrink-0 rounded-lg bg-gray-800 p-4 text-xl'>
-										{IconComponent && <IconComponent />}
-									</span>
-
-									<div>
-										<h3 className='mb-0 normal-case'>{item.technology}</h3>
-										<p className='mt-1'>{item.description}</p>
-									</div>
-								</article>
-							)
-						})}
+				<section className='py-16'>
+					<div ref={ref} className={`${inView ? 'show' : ''} hide`}>
+						<h2 className=''>{data.title.rendered}</h2>
+						<p
+							className='mb-20'
+							dangerouslySetInnerHTML={{ __html: data.content.rendered }}
+						></p>
 					</div>
+
+					{data.acf.stack.map((item, index) => {
+						const IconComponent = technologyIcons[item.technology]
+
+						return (
+							<StackItem
+								key={index}
+								technology={item.technology}
+								description={item.description}
+								IconComponent={IconComponent}
+							/>
+						)
+					})}
 				</section>
 			)}
 		</>
