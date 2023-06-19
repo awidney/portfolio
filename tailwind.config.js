@@ -7,10 +7,6 @@ export default {
 				inter: ['Inter', 'sans-serif'],
 				outfit: ['Outfit', 'sans-serif'],
 			},
-			colors: {
-				'profile-red': '#800000',
-				'project-blue': '#002134',
-			},
 			keyframes: {
 				'fade-in': {
 					to: { opacity: '1' },
