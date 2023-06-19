@@ -55,7 +55,7 @@ interface StackProps {
 const Stack = ({ restBase }: StackProps) => {
 	const restPath = restBase + 'pages/98'
 	const [data, setData] = useState<StackData | null>(null)
-	const [ref, inView] = useInView({ threshold: 1 })
+	const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true })
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -73,27 +73,31 @@ const Stack = ({ restBase }: StackProps) => {
 	return (
 		<>
 			{data && (
-				<section className='py-16'>
-					<div ref={ref} className={`${inView ? 'show' : ''} hide`}>
+				<section
+					ref={ref}
+					className={`hide border-b border-dashed border-white/20 py-14 ${
+						inView ? 'show' : ''
+					}`}
+				>
+					<div className='mb-16'>
 						<h2 className=''>{data.title.rendered}</h2>
-						<p
-							className='mb-20'
-							dangerouslySetInnerHTML={{ __html: data.content.rendered }}
-						></p>
+						<p dangerouslySetInnerHTML={{ __html: data.content.rendered }}></p>
 					</div>
 
-					{data.acf.stack.map((item, index) => {
-						const IconComponent = technologyIcons[item.technology]
+					<ul>
+						{data.acf.stack.map((item, index) => {
+							const IconComponent = technologyIcons[item.technology]
 
-						return (
-							<StackItem
-								key={index}
-								technology={item.technology}
-								description={item.description}
-								IconComponent={IconComponent}
-							/>
-						)
-					})}
+							return (
+								<StackItem
+									key={index}
+									technology={item.technology}
+									description={item.description}
+									IconComponent={IconComponent}
+								/>
+							)
+						})}
+					</ul>
 				</section>
 			)}
 		</>
