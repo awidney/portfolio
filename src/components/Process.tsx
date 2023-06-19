@@ -1,29 +1,27 @@
 interface ProcessProps {
-	chapters: {
-		title: string
-		content: {
-			paragraph: string
-		}[]
+	process_chapters: {
+		chapter_title: string
+		chapter_content: string
 	}[]
 }
 
-const Process = ({ chapters }: ProcessProps) => {
+const Process = ({ process_chapters }: ProcessProps) => {
 	return (
 		<>
-			{chapters.map((chapter, index) => (
-				<section className='mb-12' key={index}>
-					<h4 className='mt-1'>{chapter.title}</h4>
-					{chapter.content.map((paragraph, index) => (
+			{process_chapters.map(
+				(
+					chapter: { chapter_title: string; chapter_content: string },
+					index: number
+				) => (
+					<section className='mb-8 animate-fade-in opacity-0' key={index}>
+						<h4 className='mt-1'>{chapter.chapter_title}</h4>
 						<p
-							className='mb-6'
-							key={index}
-							dangerouslySetInnerHTML={{
-								__html: paragraph.paragraph,
-							}}
+							className='process mb-6'
+							dangerouslySetInnerHTML={{ __html: chapter.chapter_content }}
 						></p>
-					))}
-				</section>
-			))}
+					</section>
+				)
+			)}
 		</>
 	)
 }
