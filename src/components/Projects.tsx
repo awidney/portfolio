@@ -1,35 +1,30 @@
 import { useEffect, useState } from 'react'
-import { IoCaretUpSharp } from 'react-icons/io5'
-import { BiLinkExternal } from 'react-icons/bi'
-import {
-	AiOutlineShopping,
-	AiOutlineApi,
-	AiFillEyeInvisible,
-} from 'react-icons/ai'
-import { BsRocketTakeoff } from 'react-icons/bs'
-import Process from './Process'
-import Learnings from './Learnings'
 import { useInView } from 'react-intersection-observer'
+import Project from './Project'
 
-interface ProjectsData {
-	id: number
+export interface ProjectsData {
 	title: {
 		rendered: string
 	}
 	acf: {
-		learnings_description: string
-		learnings: {
-			learning: string
-		}[]
-		summary: string
-		chapters: {
-			title: string
-			content: {
-				paragraph: string
+		projects_section: {
+			projects_description: string
+			projects: {
+				project_title: string
+				project_description: string
+				project_tags: {
+					project_tag: string
+				}[]
+				github_repository: string
+				live_site: string
+				learnings_description: string
+				learnings_list: string
+				process_chapters: {
+					chapter_title: string
+					chapter_content: string
+				}[]
 			}[]
-		}[]
-		github_repository: string
-		live_site: string
+		}
 	}
 }
 
@@ -37,26 +32,10 @@ interface ProjectsProps {
 	restBase: string
 }
 
-interface ProjectsIcons {
-	[key: string]: React.ElementType
-}
-
-const projectsIcons: ProjectsIcons = {
-	'E-commerce Site': AiOutlineShopping,
-	'Movie Database': AiOutlineApi,
-	'Web Portfolio': BsRocketTakeoff,
-}
-
 const Projects = ({ restBase }: ProjectsProps) => {
-	const restPath = restBase + 'projects?order=asc'
-	const [data, setData] = useState<ProjectsData[] | null>(null)
-	const [expandedProjectId, setExpandedProjectId] = useState<number | null>(
-		null
-	)
-	const [activeComponent, setActiveComponent] = useState<
-		'learnings' | 'process' | null
-	>(null)
-	const [ref, inView] = useInView({ threshold: .5 })
+	const restPath = restBase + 'pages/76'
+	const [data, setData] = useState<ProjectsData | null>(null)
+	const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true })
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -71,127 +50,26 @@ const Projects = ({ restBase }: ProjectsProps) => {
 		fetchData()
 	}, [restPath])
 
-	const toggleProject = (
-		projectId: number,
-		state?: string,
-		component?: string
-	) => {
-		if (state === 'expanded') {
-			setExpandedProjectId(null)
-		} else if (component === 'learnings' || component === 'process') {
-			setExpandedProjectId(projectId)
-			setActiveComponent(component)
-		}
-	}
-
 	return (
 		<>
-			{data &&
-				data.map((project) => {
-					const IconComponent = projectsIcons[project.title.rendered]
+			{data && (
+				<section
+					ref={ref}
+					className={`hide border-b border-t border-dashed border-white/20 py-14 ${
+						inView ? 'show' : ''
+					}`}
+				>
+					<div className='mb-16'>
+						<h2>{data.title.rendered}</h2>
 
-					return (
-						<article
-							ref={ref}
-							className={` ${
-								inView ? '' : ''
-							} my-12 last-of-type:mb-0`}
-							key={project.id}
-						>
-							<div className='flex items-start gap-4'>
-								<span
-									className={`shrink-0 rounded-lg bg-gray-800 p-4 text-xl ${
-										expandedProjectId === project.id ? 'cursor-pointer' : ''
-									}`}
-									onClick={() => toggleProject(project.id, 'expanded')}
-								>
-									{expandedProjectId === project.id ? (
-										<AiFillEyeInvisible />
-									) : (
-										<IconComponent />
-									)}
-								</span>
-								<div>
-									<h3>{project.title.rendered}</h3>
-
-									{expandedProjectId !== project.id && (
-										<div className='mb-12'>
-											<p
-												className='mb-6'
-												dangerouslySetInnerHTML={{
-													__html: project.acf.summary,
-												}}
-											></p>
-
-											<div className='flex flex-wrap gap-x-6 gap-y-4'>
-												<button
-													className='btn'
-													onClick={() =>
-														toggleProject(project.id, undefined, 'learnings')
-													}
-												>
-													Learnings
-												</button>
-
-												<button
-													className='btn'
-													onClick={() =>
-														toggleProject(project.id, undefined, 'process')
-													}
-												>
-													Process
-												</button>
-
-												<a
-													className='external-link'
-													href={project.acf.live_site}
-													target='_blank'
-												>
-													Demo
-													<BiLinkExternal className='inline-block' />
-												</a>
-
-												<a
-													className='external-link'
-													href={project.acf.github_repository}
-													target='_blank'
-												>
-													GitHub
-													<BiLinkExternal className='inline-block' />
-												</a>
-											</div>
-										</div>
-									)}
-
-									{expandedProjectId === project.id && (
-										<>
-											{activeComponent === 'learnings' &&
-												project.acf.learnings_description &&
-												project.acf.learnings && (
-													<Learnings
-														learningsDescription={
-															project.acf.learnings_description
-														}
-														learnings={project.acf.learnings}
-													/>
-												)}
-
-											{activeComponent === 'process' &&
-												project.acf.chapters && (
-													<Process chapters={project.acf.chapters} />
-												)}
-
-											<IoCaretUpSharp
-												className='mx-auto w-full cursor-pointer bg-gray-700 hover:bg-gray-600'
-												onClick={() => toggleProject(project.id, 'expanded')}
-											/>
-										</>
-									)}
-								</div>
-							</div>
-						</article>
-					)
-				})}
+						<p>{data.acf.projects_section.projects_description}</p>
+					</div>
+					<Project
+						restBase={restBase}
+						data={data.acf.projects_section.projects}
+					/>
+				</section>
+			)}
 		</>
 	)
 }
