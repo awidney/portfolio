@@ -1,25 +1,14 @@
 interface LearningsProps {
-	learningsDescription: string
-	learnings: {
-		learning: string
-	}[]
+	learnings_list: string
 }
 
-const Learnings = ({ learningsDescription, learnings }: LearningsProps) => {
+const Learnings = ({ learnings_list }: LearningsProps) => {
 	return (
-		<article className='pb-12'>
-			<p className='mb-12'>{learningsDescription}</p>
-
-			<ul>
-				{learnings.map((item, index) => (
-					<li
-						key={index}
-						className='mb-6 list-disc text-sm leading-6 text-gray-300 last-of-type:mb-0'
-					>
-						{item.learning}
-					</li>
-				))}
-			</ul>
+		<article className='animate-fade-in pb-8 opacity-0'>
+			<div
+				dangerouslySetInnerHTML={{ __html: learnings_list }}
+				className='learnings'
+			></div>
 		</article>
 	)
 }
