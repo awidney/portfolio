@@ -17,7 +17,7 @@ interface ProfileProps {
 const Profile = ({ restBase }: ProfileProps) => {
 	const restPath = restBase + 'pages/6'
 	const [data, setData] = useState<ProfileData | null>(null)
-	const [ref, inView] = useInView({ threshold: .5 })
+	const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true })
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -35,16 +35,17 @@ const Profile = ({ restBase }: ProfileProps) => {
 	return (
 		<>
 			{data && (
-				<section ref={ref} className={`${inView ? 'show' : ''} hide py-16`}>
-					<p className='my-6 first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:font-bold first-letter:text-white first-line:uppercase first-line:tracking-widest'>
-						{data.acf.bio}
-					</p>
-					<h1 className='mr-4 mt-8 animate-fade-in text-right opacity-0'>
-						{data.acf.name},
-						<br />
+				<section
+					ref={ref}
+					className={`hide mt-40 py-14 ${inView ? 'show' : ''} `}
+				>
+					<h1>{data.acf.name}</h1>
+
+					<h2 className='font-inter text-xl font-semibold normal-case tracking-tight text-white'>
 						{data.acf.role}
-					</h1>
-					<div className='water'></div>
+					</h2>
+
+					<p className='mt-6'>{data.acf.bio}</p>
 				</section>
 			)}
 		</>
