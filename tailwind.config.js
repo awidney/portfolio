@@ -4,8 +4,8 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				caveat: ['Caveat', 'cursive'],
-				'nunito-sans': ['Nunito Sans', 'sans-serif'],
+				inter: ['Inter', 'sans-serif'],
+				outfit: ['Outfit', 'sans-serif'],
 			},
 			colors: {
 				'profile-red': '#800000',
