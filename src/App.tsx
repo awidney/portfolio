@@ -13,7 +13,7 @@ function App() {
 				<div className='pointer-events-none absolute inset-0 select-none overflow-hidden'>
 					<Rays />
 				</div>
-				<div>
+				<div className='mt-40'>
 					<Profile restBase={restBase} />
 					<Projects restBase={restBase} />
 					<Stack restBase={restBase} />

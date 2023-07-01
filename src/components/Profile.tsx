@@ -35,10 +35,7 @@ const Profile = ({ restBase }: ProfileProps) => {
 	return (
 		<>
 			{data && (
-				<section
-					ref={ref}
-					className={`hide mt-40 py-14 ${inView ? 'show' : ''} `}
-				>
+				<section ref={ref} className={`hide py-14 ${inView ? 'show' : ''} `}>
 					<h1>{data.acf.name}</h1>
 
 					<h2 className='font-inter text-xl font-semibold normal-case tracking-tight text-white'>
