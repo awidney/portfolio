@@ -31,7 +31,7 @@ const Footer = ({ restBase }: FooterProps) => {
 		<>
 			{data && (
 				<a
-					className='my-14 inline-block text-sm hover:text-white hover:underline'
+					className='my-14 inline-block text-sm hover:text-white hover:underline focus:text-white focus:underline'
 					href={`mailto:${data.acf.email}`}
 				>
 					{data.acf.email}

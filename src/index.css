@@ -30,7 +30,7 @@
 
 @layer components {
 	.btn {
-		@apply w-fit text-[14px] hover:text-white;
+		@apply w-fit text-[14px] hover:text-white focus:text-white;
 	}
 
 	.learnings li {
@@ -46,7 +46,7 @@
 
 @layer utilities {
 	.external-link {
-		@apply flex w-fit cursor-pointer items-center gap-1 text-[14px] hover:text-white hover:underline;
+		@apply flex w-fit cursor-pointer items-center gap-1 text-[14px] hover:text-white hover:underline focus:text-white focus:underline;
 	}
 
 	.hide {
