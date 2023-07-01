@@ -33,10 +33,8 @@ interface StackData {
 	title: {
 		rendered: string
 	}
-	content: {
-		rendered: string
-	}
 	acf: {
+		stack_description: string
 		stack: {
 			technology: string
 			description: string
@@ -81,7 +79,7 @@ const Stack = ({ restBase }: StackProps) => {
 				>
 					<div className='mb-16'>
 						<h2 className=''>{data.title.rendered}</h2>
-						<p dangerouslySetInnerHTML={{ __html: data.content.rendered }}></p>
+						<p>{data.acf.stack_description}</p>
 					</div>
 
 					<ul>
