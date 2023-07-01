@@ -51,7 +51,7 @@ const Project = ({ data }: ProjectProps) => {
 
 			setTimeout(() => {
 				setInitialScrollPosition(window.scrollY)
-			}, 200)
+			}, 400)
 		}
 	}, [expandedProjectIndex])
 
@@ -70,7 +70,11 @@ const Project = ({ data }: ProjectProps) => {
 							></div>
 							<div className='absolute left-0 top-[6px] h-2 w-2 rounded-full border border-sky-300 bg-zinc-950'></div>
 							<div>
-								<ul className='flex flex-wrap gap-y-2 pb-2 font-outfit text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-300'>
+								<ul
+									className='flex flex-wrap gap-y-2 pb-2 font-outfit text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-300'
+									id={`project-${index}`}
+									ref={ref}
+								>
 									{project.project_tags &&
 										project.project_tags.map((tag, index) => {
 											return (
@@ -85,9 +89,7 @@ const Project = ({ data }: ProjectProps) => {
 										})}
 								</ul>
 
-								<h3 id={`project-${index}`} ref={ref}>
-									{project.project_title}
-								</h3>
+								<h3>{project.project_title}</h3>
 
 								{expandedProjectIndex !== index && (
 									<div>
