@@ -89,7 +89,13 @@ const Project = ({ data }: ProjectProps) => {
 										})}
 								</ul>
 
-								<h3>{project.project_title}</h3>
+								<h3
+									className={`${
+										expandedProjectIndex === index ? 'animate-pulse' : ''
+									}`}
+								>
+									{project.project_title}
+								</h3>
 
 								{expandedProjectIndex !== index && (
 									<div>
