@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import Rays from './components/Rays'
 
 function App() {
-	const restBase = 'http://localhost/wp-portfolio/wp-json/wp/v2/'
+	const restBase = 'https://adamwidney.com/wp-portfolio/wp-json/wp/v2/'
 
 	return (
 		<div className='mx-auto max-w-[33rem] animate-fade-in px-4 opacity-0 animation-delay-700'>
