@@ -12,7 +12,7 @@ const StackItem = ({
 	return (
 		<li className='mb-8 flex items-start gap-4 last:mb-0'>
 			<span className='shrink-0 rounded-lg bg-zinc-900 p-3 text-xl'>
-				{IconComponent && <IconComponent />}
+				{IconComponent && <IconComponent role='img' aria-label={technology} />}
 			</span>
 
 			<div>
