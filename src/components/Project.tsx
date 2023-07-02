@@ -132,6 +132,8 @@ const Project = ({ data }: ProjectProps) => {
 												className='external-link'
 												href={project.github_repository}
 												target='_blank'
+												rel='noopener noreferrer'
+												aria-label='Open GitHub repository in a new tab'
 											>
 												GitHub
 												<BiLinkExternal className='inline-block' />
@@ -141,6 +143,8 @@ const Project = ({ data }: ProjectProps) => {
 												className='external-link'
 												href={project.live_site}
 												target='_blank'
+												rel='noopener noreferrer'
+												aria-label='Open live demo in a new tab'
 											>
 												Demo
 												<BiLinkExternal className='inline-block' />
