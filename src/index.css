@@ -30,7 +30,7 @@
 
 @layer components {
 	.btn {
-		@apply w-fit text-[14px] hover:text-white focus:text-white;
+		@apply w-fit text-[14px] hover:text-white focus-visible:text-white;
 	}
 
 	.learnings li {
