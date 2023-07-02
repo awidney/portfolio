@@ -136,7 +136,10 @@ const Project = ({ data }: ProjectProps) => {
 												aria-label='Open GitHub repository in a new tab'
 											>
 												GitHub
-												<BiLinkExternal className='inline-block' />
+												<BiLinkExternal
+													className='inline-block'
+													aria-hidden='true'
+												/>
 											</a>
 
 											<a
@@ -147,7 +150,10 @@ const Project = ({ data }: ProjectProps) => {
 												aria-label='Open live demo in a new tab'
 											>
 												Demo
-												<BiLinkExternal className='inline-block' />
+												<BiLinkExternal
+													className='inline-block'
+													aria-hidden='true'
+												/>
 											</a>
 										</div>
 									</div>
