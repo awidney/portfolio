@@ -17,6 +17,7 @@ interface ProfileProps {
 const Profile = ({ restBase }: ProfileProps) => {
 	const restPath = restBase + 'pages/6'
 	const [data, setData] = useState<ProfileData | null>(null)
+	const [error, setError] = useState<string | null>(null)
 	const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true })
 
 	useEffect(() => {
@@ -25,8 +26,9 @@ const Profile = ({ restBase }: ProfileProps) => {
 				const response = await fetch(restPath)
 				const jsonData = await response.json()
 				setData(jsonData)
+				setError(null)
 			} catch (error) {
-				console.log(error)
+				setError('My profile should be here, but something went wrong.')
 			}
 		}
 		fetchData()
@@ -34,7 +36,9 @@ const Profile = ({ restBase }: ProfileProps) => {
 
 	return (
 		<>
-			{data && (
+			{error ? (
+				<p className='error'>{error}</p>
+			) : data ? (
 				<section ref={ref} className={`hide py-14 ${inView ? 'show' : ''} `}>
 					<h1>{data.acf.name}</h1>
 
@@ -44,7 +48,7 @@ const Profile = ({ restBase }: ProfileProps) => {
 
 					<p className='mt-6'>{data.acf.bio}</p>
 				</section>
-			)}
+			) : null}
 		</>
 	)
 }

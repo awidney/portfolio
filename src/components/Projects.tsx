@@ -35,6 +35,7 @@ interface ProjectsProps {
 const Projects = ({ restBase }: ProjectsProps) => {
 	const restPath = restBase + 'pages/76'
 	const [data, setData] = useState<ProjectsData | null>(null)
+	const [error, setError] = useState<string | null>(null)
 	const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true })
 
 	useEffect(() => {
@@ -43,8 +44,9 @@ const Projects = ({ restBase }: ProjectsProps) => {
 				const response = await fetch(restPath)
 				const jsonData = await response.json()
 				setData(jsonData)
+				setError(null)
 			} catch (error) {
-				console.log(error)
+				setError('My projects should be here, but something went wrong.')
 			}
 		}
 		fetchData()
@@ -52,7 +54,9 @@ const Projects = ({ restBase }: ProjectsProps) => {
 
 	return (
 		<>
-			{data && (
+			{error ? (
+				<p className='error'>{error}</p>
+			) : data ? (
 				<section
 					ref={ref}
 					className={`hide border-b border-t border-dashed border-white/20 py-14 ${
@@ -69,7 +73,7 @@ const Projects = ({ restBase }: ProjectsProps) => {
 						data={data.acf.projects_section.projects}
 					/>
 				</section>
-			)}
+			) : null}
 		</>
 	)
 }

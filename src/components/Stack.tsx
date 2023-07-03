@@ -53,6 +53,7 @@ interface StackProps {
 const Stack = ({ restBase }: StackProps) => {
 	const restPath = restBase + 'pages/98'
 	const [data, setData] = useState<StackData | null>(null)
+	const [error, setError] = useState<string | null>(null)
 	const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true })
 
 	useEffect(() => {
@@ -61,8 +62,9 @@ const Stack = ({ restBase }: StackProps) => {
 				const response = await fetch(restPath)
 				const jsonData = await response.json()
 				setData(jsonData)
+				setError(null)
 			} catch (error) {
-				console.log(error)
+				setError('My stack should be here, but something went wrong.')
 			}
 		}
 		fetchData()
@@ -70,7 +72,9 @@ const Stack = ({ restBase }: StackProps) => {
 
 	return (
 		<>
-			{data && (
+			{error ? (
+				<p className='error'>{error}</p>
+			) : data ? (
 				<section
 					ref={ref}
 					className={`hide border-b border-dashed border-white/20 py-14 ${
@@ -97,7 +101,7 @@ const Stack = ({ restBase }: StackProps) => {
 						})}
 					</ul>
 				</section>
-			)}
+			) : null}
 		</>
 	)
 }

@@ -13,6 +13,7 @@ interface FooterProps {
 const Footer = ({ restBase }: FooterProps) => {
 	const restPath = restBase + 'pages/6'
 	const [data, setData] = useState<FooterData | null>(null)
+	const [error, setError] = useState<string | null>(null)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -20,8 +21,9 @@ const Footer = ({ restBase }: FooterProps) => {
 				const response = await fetch(restPath)
 				const jsonData = await response.json()
 				setData(jsonData)
+				setError(null)
 			} catch (error) {
-				console.log(error)
+				setError('My contact information should be here, but something went wrong.')
 			}
 		}
 		fetchData()
@@ -29,14 +31,16 @@ const Footer = ({ restBase }: FooterProps) => {
 
 	return (
 		<>
-			{data && (
+			{error ? (
+				<p className='error'>{error}</p>
+			) : data ? (
 				<a
 					className='my-14 inline-block text-sm hover:text-white hover:underline focus:text-white focus:underline'
 					href={`mailto:${data.acf.email}`}
 				>
 					{data.acf.email}
 				</a>
-			)}
+			) : null}
 		</>
 	)
 }
